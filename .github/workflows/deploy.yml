@@ -22,7 +22,7 @@ jobs:
 
       - name: Copy files to EC2
         run: |
-          rsync -avz --delete -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" ./ ubuntu@ec2-xx-xx-xx-xx.compute-1.amazonaws.com:/home/ubuntu/app
+          rsync -avz --delete -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" ./ ubuntu@ec2-54-146-130-227.compute-1.amazonaws.com:/home/ubuntu/app
 
       - name: Deploy on EC2
         run: |
