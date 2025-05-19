@@ -32,7 +32,7 @@ jobs:
             docker-compose up -d --build
           EOF
 
-      - name: Remove old containers
+      - name: Remove old container
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
             docker container prune -f
