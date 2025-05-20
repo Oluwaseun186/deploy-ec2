@@ -18,11 +18,8 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
           
-
-      - name: Copy files to EC2
-        run: |
-          rsync -avz --delete -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" ./ ubuntu@ec2-54-146-130-227.compute-1.amazonaws.com:/home/ubuntu/app
 
       - name: Deploy on EC2
         run: |
@@ -31,10 +28,4 @@ jobs:
             cd /home/${{ secrets.EC2_USER }}/app
             docker-compose down
             docker-compose up -d --build
-          EOF
-
-      - name: Remove old containers
-        run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-            docker container prune -f
           EOF
