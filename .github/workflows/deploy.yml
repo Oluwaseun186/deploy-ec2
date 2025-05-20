@@ -23,7 +23,7 @@ jobs:
 
       - name: Deploy on EC2
         run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no user@host << 'EOF'
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@ec2-3-86-198-236.compute-1.amazonaws.com << 'EOF'
             [ ! -d "/home/user/app/.git" ] && git clone https://github.com/Oluwaseun186/compose-up.git /home/user/app
             cd /home/user/app
             docker compose down
